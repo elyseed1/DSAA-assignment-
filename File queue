@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 100;
+
+class Queue {
+private:
+    int arr[MAX];
+    int front, rear;
+
+public:
+    Queue() {
+        front = 0;
+        rear = -1;
+    }
+
+    // Enqueue - O(1)
+    void enqueue(int value) {
+        if (rear == MAX - 1) {
+            cout << "Queue Overflow!" << endl;
+            return;
+        }
+        arr[++rear] = value;
+    }
+
+    // Dequeue - O(1)
+    void dequeue() {
+        if (front > rear) {
+            cout << "Queue Underflow!" << endl;
+            return;
+        }
+        front++;
+    }
+
+    // Peek - O(1)
+    int peek() {
+        if (front > rear) {
+            cout << "Queue is empty!" << endl;
+            return -1;
+        }
+        return arr[front];
+    }
+
+    // Print Queue - O(n)
+    void display() {
+        if (front > rear) {
+            cout << "Queue is empty!" << endl;
+            return;
+        }
+
+        cout << "Queue: ";
+        for (int i = front; i <= rear; i++)
+            cout << arr[i] << " ";
+        cout << endl;
+    }
+};
+
+int main() {
+    Queue q;
+
+    cout << "Enqueue 10" << endl;
+    q.enqueue(10);
+    q.display();
+
+    cout << "Enqueue 20" << endl;
+    q.enqueue(20);
+    q.display();
+
+    cout << "Enqueue 30" << endl;
+    q.enqueue(30);
+    q.display();
+
+    cout << "Front Element: " << q.peek() << endl;
+
+    cout << "Dequeue" << endl;
+    q.dequeue();
+    q.display();
+
+    cout << "Front Element: " << q.peek() << endl;
+
+    return 0;
